@@ -1,0 +1,807 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mishavad_API</name>
+    </assembly>
+    <members>
+        <member name="M:Mishavad_API.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="F:Mishavad_API.Areas.HelpPage.HelpPageConfig.allowedIPs">
+            <summary>
+            Added by Ehsabd to store IPs that entered password to allow them to use the api
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:Mishavad_API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:Mishavad_API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:Mishavad_API.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:Mishavad_API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:Mishavad_API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:Mishavad_API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,Mishavad_API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,Mishavad_API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:Mishavad_API.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},Mishavad_API.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:Mishavad_API.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:Mishavad_API.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.#ctor(Mishavad_API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Mishavad_API.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,Mishavad_API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Mishavad_API.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:Mishavad_API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mishavad_API.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mishavad_API.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="M:Mishavad_API.Controllers.AccountController.GetUserInfo">
+            <summary>
+            This method is used to check whether a user is already registered or not (you can call it both with local/external authentication)
+            We added to this method other information we need. In case of a non-registered user, they will be null.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mishavad_API.Controllers.DocumentsController.PostNewUserDocument(Mishavad_API.Document_AddBM)">
+            <summary>
+            NOTE: Only a user, theriselves can post a document, so we do not have two POST methods for User, ThisUser!
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mishavad_API.Controllers.DocumentsController.PostUserDocument(System.Int32,System.Boolean)">
+            <summary>
+            NOTE: Only a user, theriselves can update (remove) a document, so we do not have two POST methods for User, ThisUser!
+            currently we do not update documents, we only can remove them
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Controllers.CampaignsController.GetCampaigns(System.Web.Http.OData.Query.ODataQueryOptions{Mishavad_API.Models.Campaign})">
+            <summary>
+            Gets the list of campaigns
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Controllers.CampaignsController.GetCampaignByIdOrSlug(System.String)">
+            <summary>
+            Returns a non-null campaign based on Id or Slug. If there was no campaign with 
+            the Id/slud it throws a Not Found web exception
+            </summary>
+            <param name="id_or_slug"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mishavad_API.Controllers.FileServerTokensController.PostImageToken(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="tokenType"> Avatar, CampaignImage, or Document</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mishavad_API.Helpers.EncryptionService.BinaryBucket">
+            <summary>
+            This is a "made-up" object to store Key and IV 
+            I just did have no idea what to name it
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Helpers.EncryptionService.LoadBinaryFile(System.String)">
+            <summary>
+            Loads the binary file
+            </summary>
+            <param name="binaryFilePath"></param>
+        </member>
+        <member name="M:Mishavad_API.Migrations.Configuration.Debug(Mishavad_API.Models.ApplicationDbContext,System.String,System.Object[])">
+            <summary>
+            write a message to the Package Manager Console
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.BlogPost.SecondaryTitle">
+            <summary>
+            Used along with Title to make title tag in the head: 
+            Title – Secondary Title | Website name
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.BlogPost.Tags">
+            <summary>
+            a string of tags joined by the '|' character
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.BlogPost.ImageFullPath">
+            <summary>
+            Computes Fullpath of Image
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.Campaign.CollectedFundPercent">
+            <summary>
+            It is computed this way = CollectedFund*100/TargetFund (Returns an integer but does not rounds)
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.Reward.NClaimed">
+            <summary>
+            This property stores the number of rewards that have been claimed
+            This property is updated externally when a new gift fund added
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Models.CampaignVM">
+            <summary>
+            View model that will be shown when the agent uses GET API for Campaign
+            All VM properties are nullable because we do not want to get default values 
+            when properties are transfered from data models to view models
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Models.BF_Idx">
+            <summary>
+            Binary file position to locate Key and IV for cryptography
+            The annotated property type should be typeof(long)
+            </summary>
+        </member>
+        <member name="M:Mishavad_API.Models.ApplicationDbContext.DecryptPendingEntries(System.Collections.Generic.List{System.Data.Entity.Core.Objects.ObjectStateEntry})">
+            <summary>
+            Decrypt updated entities for continued use
+            </summary>
+            <param name="pendingEntries"></param>
+        </member>
+        <member name="M:Mishavad_API.Models.ApplicationDbContext.EncryptEntity(System.Object)">
+            <summary>
+            Gets all the properties that are encryptable and encrypt them
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Mishavad_API.Models.ApplicationDbContext.DecryptEntity(System.Object)">
+            <summary>
+            Gets all the properties that are encryptable and decyrpt them
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Mishavad_API.Models.ApplicationDbContext.GetEntityType(System.Data.Entity.Core.Objects.ObjectStateEntry)">
+            <summary>
+            This function gets the type of the entity inside a entry. Note that entr.GetType() returns ObjectStateEntry as type!
+            Also entry.Entity.GetType returns the type of proxy object
+            </summary>
+            <param name="en"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Mishavad_API.Models.OperationAuth.ReasonsForAction">
+            <summary>
+            Reasons for acceptance or rejection
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Models.Account">
+            <summary>
+            The total money in an account could be computed by means of summation of all its journal entries.
+            Usuallyt this occurs at the end of each journal entry, and is stored in Balance.
+            This procedure may be done using STORED PROCEDURES in DB. This could result in a
+            faster processing of transactions. We could alter the row related to account in that procedure.
+            
+            
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.Account.AccountName">
+            <summary>
+            A property like Username which identifies an MshAccount, usually based on the user email. 
+            For systemic accounts like Platform account or Anonymous Contributor accounts this could be anything else
+            Maybe we use mobile number in future too!
+            NOTEs:
+            1) to create an Account with UserAccount type, there must be an Email specified
+            2) We do not query Transactions related to an account, we usually query related joural entries
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Models.Transaction">
+            <summary>
+            Every transaction consists of two or more matching journal entries (Debit/Credit, Double-Entry)
+            see these links:
+                http://www.math-cs.gordon.edu/courses/cs211/ATMExample/UseCases.html
+                http://www.cs.usfca.edu/~srollins/courses/cs682-s08/web/notes/transactions.html
+                
+            Creation of a Transaction with its JournalEntries means that it is completed. 
+            There is no such thing as 'pending' transaction here mainly because we don't have a distributed database here.
+            
+            We may use an encrypted Hash to validate a transaction and its journal entries
+            
+            When the campaign failes a there will be chargeback transactions related to all its transactions.
+            The related transactions are obtained by using JournalEntry.Transaction property for all JournalEntries
+            related to the campaign's Account.
+            
+            When the campaign successds, money remains in Campaign Account until someone 
+            withdraw it from Mishavad to a Bank Account
+            
+            TODO: Rewards should also be added somewhere in this model! Maybe they need accounts like Reward sale etc.
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.Transaction.CreatedById">
+            <summary>
+            Id of the ApplicationUser who created this transaction
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.Transaction.ExtraInfoJSONId">
+            <summary>
+            Note that we can't replace this by an InvoiceId because there are internal gifts having no
+            and Invoices could also be removed or archived. However the Id is usually copied from DepositInvoice
+            in case there is a payment gateway deposit.
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Models.DepositInvoice">
+            <summary>
+            TODO: This summary needs to be edited. Some statements are related to other entities
+            The DepositeInvoice type is used exclusively to deposit money into an Account.
+            It's created before banking procedure to transfer fund succeeds.
+            One usually adds fund to their account when they want to contribute to a campaign.
+            This campaign is identified using a Transaction. 
+            the Invoice is approved (usually by redirection from a bank). 
+            
+            NOTE: MerchantCode or MerchantID is not stored in Invoices they are generated in the controllers
+            
+            IMP NOTE: Notice that we used same PK/FK for this entity because the Invoices DEPEND on transactions
+            It seems awry but an Invoice have to have a corresponding transaction but a transaction do not.
+            
+            NOTE: DepositInvoice is an archivable entity. It should not tie with the whole DB integrity. 
+            Bear this in mind while designing the database
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.DepositInvoice.CreatedDateUtc">
+            <summary>
+            The DateTime the invoice is created
+            Usually the following payment parameters are the same as this property:
+                Pasargad:
+                    InvoiceDate
+                    TimeStamp
+                ZarinPal: 
+                    None!
+            So we first create invoice and then assign these variables
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.DepositInvoice.PaymentGateway">
+            <summary>
+            Indicates the gateway in which this invoice is going to be paid. 
+            If the payment failed, we will create another invoice
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.DepositInvoice.GatewayTransactionReferenceID">
+            <summary>
+            Pasargad: 
+                transactionReferenceID
+            ZarinPal
+                refID
+            
+            NOTE: to ensure compatiblity with all external payment systems we store all external Ids in string format.
+            Because the number of Invoices are generally not that much there is no problem in terms of their size
+            The other reason is that we generally do not query invoices for ordinary users so the number of queries are very small
+            Also we archive invoice data from time to time to free some spaces
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.DepositInvoice.AccountName">
+            <summary>
+            AccountName to be deposit in. Either AccountName of Anon. Contributors or AccountName related to a new account or existing account
+            once the invoice is approved by bank we create Account for the new account or use the previous AccountId to add
+            the Transaction and Journal Entries. 
+            Why AccountName instead of AccountId:
+            1) We do not need to create accounts for unpaid invoices
+            2) We could discard invoices over time so size is not an important thing
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.DepositInvoice.ReceiverCampaignId">
+            <summary>
+            An optional property related to the reciever campaign. If AccountName does not exist or
+            is systemic account( e.g, Anon.Contributors etc) this property is necessary.
+            The Account of ReceiverCampaign will be obtained by ReceiverCampaign.Account property
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.DepositInvoice.GatewayTraceNumber">
+            <summary>
+            TraceNumber in Pasargad Payment (Shomare Peygiri)
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Models.TransactionChargebackMap">
+            <summary>
+            This is a 1..0 or 1..1 relationship and because two entities of the same type are related to each other,
+            We can't use both PK/FK for both of them. So we must use unique indecies. Unique FK is not supported in EF
+            I think the cleanest way to design chargebacks is this. However I could change my mind in future.
+            The idea that we assign only OriginalTransaction both PK/FK in this entity is not sufficient because
+            we need both ChargedbackBy and ChargebackOf. We currently calculate these by joins in controllers.
+            For the same reasons I made both OriginalTransactionId and ChargebackTransactionId Nullable, because
+            when we remove either of them we must be able to trace their mate transaction so the Map must not be deleted
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.ExtraInfoJSON.InfoJSON">
+            <summary>
+            A JSON string which contains info related to this invoice
+            These could include the payer/doner firstName/lastName/Comments etc.
+            This property should be evaluated in terms of XSS attacks before saving.
+            This property will be copied to the same property in Transaction because 
+            Invoices as noted above are detachable from the database
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Models.AuthorizationManager">
+            <summary>
+            This subclassing is used to implement claim-based access control 
+            refer to Pro ASP.net Web API Security Pages 92-93
+            </summary>
+        </member>
+        <member name="T:Mishavad_API.Models.ClaimsAuthorize">
+            <summary>
+            You may use this attribute like this:
+            [ClaimsAuthorize (Action=AuthAction.GetFullDetails, Resource=AuthResource.Campaigns)]
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.ApplicationUser.AccountBalance">
+            TODO: Add Gift fund queries if needed just like Account Balance to the model
+            
+        </member>
+        <member name="P:Mishavad_API.Models.UserInfo.Gender">
+            <summary>
+            m: male
+            f: female
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.UserInfo.NationalID">
+            <summary>
+            Code Melli
+            کد ملی
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.UserInfo.BirthCertNo">
+            <summary>
+            Shomare Shenasname
+            شماره شناسنامه
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.UserInfo.DateOfBirth">
+            <summary>
+            تاریخ تولد
+            </summary>
+        </member>
+        <member name="P:Mishavad_API.Models.UserInfo.BF_Idx">
+            <summary>
+            Binary File Key/IV Index
+            </summary>
+        </member>
+    </members>
+</doc>

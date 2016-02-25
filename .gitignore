@@ -1,0 +1,12 @@
+Initial13-5-2016.sql
+.vs/
+packages/
+TestResults/
+Mishavad_API/bin/
+Mishavad_API/obj/
+Mishavad_API_UnitTest/bin/
+Mishavad_API_UnitTest/obj/
+Mishavad_API.Tests/bin/
+Mishavad_API.Tests/obj/
+MySqlQueries/
+
